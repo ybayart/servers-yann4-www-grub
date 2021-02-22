@@ -1,7 +1,7 @@
 <?php
 	if ($_SERVER['REMOTE_ADDR'] && in_array($_SERVER['REMOTE_ADDR'], array('192.168.1.100', '127.0.0.1')))
 	{
-		$actions = array('get', 'set');
+		$actions = array('get', 'set', 'shutdown');
 		if (isset($_GET['action']) && in_array($_GET['action'], $actions))
 		{
 			if ($_GET['action'] == 'get')
@@ -18,6 +18,10 @@
 				{
 					exit('ID value not set or invalid');
 				}
+			}
+			else if ($_GET['action'] == 'shutdown')
+			{
+				passthru('sudo shutdown 0');
 			}
 		}
 		else
